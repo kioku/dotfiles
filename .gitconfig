@@ -12,5 +12,5 @@
 [rerere]
       enabled = true
 [core]
-      editor = nano
+      editor = vim
       excludesfile = ~/.gitignore_global

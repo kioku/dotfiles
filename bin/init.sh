@@ -10,20 +10,20 @@ chsh -s /bin/zsh
 # =============================================================================
 cd $HOME
 rm $HOME/.zshrc
-cp webfaction-dotfiles/.bashrc .
-cp webfaction-dotfiles/.gitconfig .
-ln -s webfaction-dotfiles/.zshrc
-ln -s webfaction-dotfiles/.bash_aliases
-ln -s webfaction-dotfiles/.gitignore_global
-ln -s webfaction-dotfiles/.screenrc
-ln -s webfaction-dotfiles/.tmux.conf
-ln -s webfaction-dotfiles/.vim
-ln -s webfaction-dotfiles/.vimrc
+cp do-dotfiles/.bashrc .
+cp do-dotfiles/.gitconfig .
+ln -s do-dotfiles/.zshrc
+ln -s do-dotfiles/.bash_aliases
+ln -s do-dotfiles/.gitignore_global
+ln -s do-dotfiles/.screenrc
+ln -s do-dotfiles/.tmux.conf
+ln -s do-dotfiles/.vim
+ln -s do-dotfiles/.vimrc
 
 mkdir -p $HOME/bin
 cd $HOME/bin
-ln -s $HOME/webfaction-dotfiles/bin/search.sh
-ln -s $HOME/webfaction-dotfiles/bin/show-memory.sh
+ln -s $HOME/do-dotfiles/bin/search.sh
+ln -s $HOME/do-dotfiles/bin/show-memory.sh
 
 cd $HOME
 echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bash_exports
@@ -44,7 +44,7 @@ make && make install
 cd ~/bin
 ln -s ~/opt/vim/bin/vim
 
-cd ~/webfaction-dotfiles/bin
+cd ~/do-dotfiles/bin
 ./install_venv.sh
 
 # Install supervisor
