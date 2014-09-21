@@ -5,6 +5,8 @@
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 chsh -s /bin/zsh
 
+curl -L https://github.com/kioku/losalfar-zsh-theme/raw/master/install.sh | sh
+
 
 # Now we place some symlinks with useful aliases and settings
 # =============================================================================
@@ -49,10 +51,6 @@ cd ~/do-dotfiles/bin
 
 # Install supervisor
 # =============================================================================
-pip-2.7 install supervisor
+#pip-2.7 install supervisor
 
 echo "All done!"
-echo "Don't forget to personalise your .gitconfig:"
-echo 'git config --global user.email "<yourmail@gmail.com>"'
-echo 'git config --global user.name "Your Name"'
-echo 'Also install pip==1.3 into your virtualenv'
