@@ -14,6 +14,7 @@ alias c="clear"
 alias g="git"
 alias v="vim"
 alias sbrc="source ~/.bashrc"
+alias tmux="tmux -2"
 
 
 # Always use color output for `ls`

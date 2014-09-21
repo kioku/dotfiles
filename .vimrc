@@ -145,7 +145,13 @@ set nofoldenable
 " ===================
 let g:ctrlp_max_height = 30
 
-"
+
+" Settings for NerdTree
+" ======================
+let NERDTreeIgnore=['\.pyc$']
+let NERDTreeShowHidden=1
+
+
 " Movement
 " =========
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
