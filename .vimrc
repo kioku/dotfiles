@@ -1,7 +1,8 @@
 set encoding=utf-8
+set nocp
 autocmd! bufwritepost .vimrc source %
 call pathogen#infect()
- 
+
 filetype off
 filetype plugin indent on
 syntax on
@@ -62,7 +63,7 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 noremap <Leader>w :update<CR>
 vnoremap <Leader>w <C-C>:update<CR>
 inoremap <Leader>w <C-O>:update<CR>
-      
+
 
 " Quick quit command
 noremap <Leader>e :quit<CR>

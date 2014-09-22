@@ -3,7 +3,9 @@
 # First lets install zsh and change the default shell
 # =============================================================================
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-chsh -s /bin/zsh
+
+# Change the shell to zsh
+zsh
 
 curl -L https://github.com/kioku/losalfar-zsh-theme/raw/master/install.sh | sh
 
@@ -34,8 +36,8 @@ echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bash_exports
 # Install Vim with Python support
 # =============================================================================
 cd $HOME
-mkdir -p lib/python2.7
-easy_install-2.7 mercurial
+mkdir -p lib/python
+easy_install mercurial
 mkdir -p ~/src
 mkdir -p ~/opt
 mkdir -p ~/bin
@@ -49,8 +51,11 @@ ln -s ~/opt/vim/bin/vim
 cd ~/do-dotfiles/bin
 ./install_venv.sh
 
+# TODO: Clean up after the vim install
+# =============================================================================
+
 # Install supervisor
 # =============================================================================
-#pip-2.7 install supervisor
+#pip install supervisor
 
 echo "All done!"

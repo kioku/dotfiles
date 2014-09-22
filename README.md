@@ -24,7 +24,7 @@ This is necessary in case you want to start your project right on the server.
 In order to make the initial commit, you need to provide your git
 user name and email.
 
-# Credits
+# Thanks to
 
 This project started as a fork from
-[bitmazk/webfaction-dotfiles](wehttps://github.com/bitmazk/webfaction-dotfiles).
+[bitmazk/webfaction-dotfiles](https://github.com/bitmazk/webfaction-dotfiles).
