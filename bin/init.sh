@@ -7,9 +7,6 @@
 # =============================================================================
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
-# Change the shell to zsh
-zsh
-
 # Install our custom zsh theme
 curl -L https://github.com/kioku/losalfar-zsh-theme/raw/master/install.sh | sh
 
@@ -32,9 +29,6 @@ mkdir -p $HOME/bin
 cd $HOME/bin
 ln -s $HOME/do-dotfiles/bin/search.sh
 ln -s $HOME/do-dotfiles/bin/show-memory.sh
-
-cd $HOME
-echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bash_exports
 
 
 # Install Vim with Python support
@@ -61,5 +55,9 @@ cd ~/do-dotfiles/bin
 # Install supervisor
 # =============================================================================
 #pip install supervisor
+
+
+# Change the shell to zsh
+zsh
 
 echo "All done!"
