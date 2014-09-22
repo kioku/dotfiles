@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# TODO: Check for necessary packages and install them otherwise
+# git, python-setuptools, python-pip, python-dev
+
 # First lets install zsh and change the default shell
 # =============================================================================
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
@@ -7,6 +10,7 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 # Change the shell to zsh
 zsh
 
+# Install our custom zsh theme
 curl -L https://github.com/kioku/losalfar-zsh-theme/raw/master/install.sh | sh
 
 
