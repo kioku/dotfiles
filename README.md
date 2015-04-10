@@ -20,5 +20,5 @@ When it's done it will remind you to configure git:
 
 # Thanks to
 
-This project started as by forking
+This project started by forking
 [bitmazk/webfaction-dotfiles](https://github.com/bitmazk/webfaction-dotfiles).
