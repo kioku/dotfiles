@@ -20,6 +20,7 @@ cp do-dotfiles/.gitconfig .
 ln -s do-dotfiles/.zshrc
 ln -s do-dotfiles/.bash_aliases
 ln -s do-dotfiles/.gitignore_global
+ln -s do-dotfiles/.gitmessage
 ln -s do-dotfiles/.screenrc
 ln -s do-dotfiles/.tmux.conf
 ln -s do-dotfiles/.vim

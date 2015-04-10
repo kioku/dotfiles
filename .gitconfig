@@ -18,6 +18,8 @@
     diff = auto
     status = auto
     ui = auto
+[commit]
+    template=~/.gitmessage
 [core]
     editor = vim
     excludesfile = ~/.gitignore_global
