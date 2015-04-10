@@ -1,1 +1,7 @@
 .ropeproject
+*.sw[nop]
+*.pyc
+db/*.sqlite3
+log/*.log
+tmp/*
+public/*
