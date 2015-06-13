@@ -1,7 +1,5 @@
 set encoding=utf-8
-set nocp
 autocmd! bufwritepost .vimrc source %
-call pathogen#infect()
 
 filetype off
 filetype plugin indent on
@@ -14,6 +12,9 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 
 " General option
 " ===============
@@ -128,12 +129,13 @@ nmap Q gqap
 let g:jedi#related_names_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 
 " Settings for vim-powerline
 " ===========================
-set laststatus=2
+" vim-powerline is currently not installed
+" set laststatus=2
 " let g:Powerline_symbols = 'fancy'
 
 
@@ -144,13 +146,47 @@ set nofoldenable
 
 " Settings for ctrlp
 " ===================
-let g:ctrlp_max_height = 30
-
+" ctrlp currently not installed
+" let g:loaded_ctrlp = 1
+" let g:ctrlp_max_height = 30
 
 " Settings for NerdTree
-" ======================
-let NERDTreeIgnore=['\.pyc$']
+" =====================
+nmap <leader>ne :NERDTree<cr>
+let NERDTreeIgnore = ['\.pyc$']
 let NERDTreeShowHidden=1
+
+
+" Setting for python-mode
+" =======================
+let g:pymode_rope = 1
+let g:pymode_rope_completion = 0
+
+" Documentation
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+
+" Linting
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes,pep8"
+" Auto check on save
+let g:pymode_lint_write = 1
+
+" Support virtualenv
+let g:pymode_virtualenv = 1
+
+" Enable breakpoints plugin
+let g:pymode_breakpoint = 0
+"let g:pymode_breakpoint_bind = '<leader>b'
+
+" syntax highlighting
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" Don't autofold code
+let g:pymode_folding = 0
 
 
 " Movement
@@ -161,8 +197,8 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+map <Leader>bb <esc>:tabprevious<CR>
+map <Leader>bn <esc>:tabnext<CR>
 vnoremap <Leader>s :sort<CR>
 
 
