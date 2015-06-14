@@ -6,4 +6,4 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-source .bash_exports
+# source .bash_exports

@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged/')
 
 " Define bundles via Github repos
 Plug 'kchmck/vim-coffee-script'
-Plug 'davidhalter/jedi-vim
+Plug 'davidhalter/jedi-vim'
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'pbrisbin/vim-mkdir'
 " Plug 'scrooloose/syntastic'
