@@ -10,3 +10,6 @@ installed.
     cd ~
     git clone https://github.com/kioku/dotfiles.git
     env RCRC=$HOME/dotfiles/rcrc rcup
+
+You will need to install the vim plugins afterwards, so open up a vim instance
+and run :PlugInstall
