@@ -27,16 +27,18 @@ com! -nargs=+  -bar Bundle call VundleToPlug("Bundle", <args>)
 call plug#begin('~/.vim/plugged/')
 
 " Define bundles via Github repos
-Plug 'kchmck/vim-coffee-script'
-Plug 'davidhalter/jedi-vim'
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'pbrisbin/vim-mkdir'
-" Plug 'scrooloose/syntastic'
+Plug 'kchmck/vim-coffee-script', {'for': 'coffeescript'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
+
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'pbrisbin/vim-mkdir'
+" Plug 'scrooloose/syntastic'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
