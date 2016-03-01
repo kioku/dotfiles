@@ -29,3 +29,6 @@
     enabled = true
 [push]
 	default = simple
+[user]
+    name = Claudiu Ivan
+    email = contact@claudiu-ivan.com
