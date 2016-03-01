@@ -59,22 +59,40 @@ endfunction
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
-
 " Quicksave command
 noremap <Leader>w :update<CR>
 vnoremap <Leader>w <C-C>:update<CR>
 inoremap <Leader>w <C-O>:update<CR>
 
-
 " Quick quit command
 noremap <Leader>e :quit<CR>
-
 
 " Bind nohl
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 inoremap <C-n> :nohl<CR>
 
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Quote words under cursor
+nnoremap <leader>" viW<esc>a"<esc>gvo<esc>i"<esc>gvo<esc>3l
+nnoremap <leader>' viW<esc>a'<esc>gvo<esc>i'<esc>gvo<esc>3l
+
+" Quote current selection
+" TODO: This only works for selections that are created "forwardly"
+vnoremap <leader>" <esc>a"<esc>gvo<esc>i"<esc>gvo<esc>ll
+vnoremap <leader>' <esc>a'<esc>gvo<esc>i'<esc>gvo<esc>ll
+
+" Save a file without sudo
+cmap w!! w !sudo tee % >/dev/null
+
+" Since I never use the ; key anyway, this is a real optimization for almost
+" all Vim commands, as I don't have to press the Shift key to form chords to
+" enter ex mode.
+nnoremap ; :
+nnoremap <leader>; ;
 
 set history=700
 set undolevels=700
@@ -96,6 +114,14 @@ set smartcase
 set nowrap " don't automatically wrap on load
 set tw=79  " width of document (used by gd)
 set fo-=t  " don't automatically wrap text when typing
+
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set title                " change the terminal's title
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+
+set nobackup
+set noswapfile
 
 
 " Awesome line number magic
@@ -231,3 +257,21 @@ color wombat256mod
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
 map <Leader>v :source ~/.vimrc
+
+" Tern
+" =====
+"let g:tern_map_keys=1
+"let g:tern_show_argument_hints="on_hold"
+
+
+" javascript-libraries-syntax
+" ===========================
+let g:used_javascript_libs = 'underscore,angularjs'
+
+" vim-javascript
+" ==============
+let g:javascript_enable_domhtmlcss = 1
+
+" vim-flake8
+" ==========
+" autocmd BufWritePost *.py call Flake8()
