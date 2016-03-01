@@ -28,12 +28,26 @@ call plug#begin('~/.vim/plugged/')
 
 " Define bundles via Github repos
 Plug 'kchmck/vim-coffee-script', {'for': 'coffeescript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
+Plug 'hdima/python-syntax', {'for': 'python'}
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+Plug 'nvie/vim-flake8', {'for': 'python'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 
+" Define some colorschemes
+Plug 'wellsjo/wellsokai.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'mkarmona/colorsbox'
+Plug 'easysid/mod8.vim'
+Plug 'AlessandroYorba/Sierra'
+"Plug 'michalbachowski/vim-wombat256mod'
+
+" Other plugins
+" Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
 " Plug 'ctrlpvim/ctrlp.vim'
