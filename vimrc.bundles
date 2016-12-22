@@ -27,9 +27,6 @@ com! -nargs=+  -bar Bundle call VundleToPlug("Bundle", <args>)
 call plug#begin('~/.vim/plugged/')
 
 " Define bundles via Github repos
-Plug 'kchmck/vim-coffee-script', {'for': 'coffeescript'}
-Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
@@ -37,6 +34,15 @@ Plug 'nvie/vim-flake8', {'for': 'python'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
+
+Plug 'kchmck/vim-coffee-script', {'for': 'coffeescript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+Plug 'Shougo/unite.vim', {'for': 'typescript'}
+Plug 'Quramy/vim-dtsm', {'for': 'typescript'}
 
 " Define some colorschemes
 Plug 'wellsjo/wellsokai.vim'
