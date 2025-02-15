@@ -4,6 +4,7 @@ alias v="vim"
 alias sbrc="source ~/.bashrc"
 alias tmux="tmux -2"
 
+alias ~~="cd /opt/dev"
 
 # Easier file & directory listing
 alias lsd='ls -l | grep "^d"'  # only directories as a list

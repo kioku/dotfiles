@@ -4,6 +4,5 @@
 db/*.sqlite3
 log/*.log
 tmp/*
-public/*
 .DS_Store
 .idea/
