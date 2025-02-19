@@ -275,3 +275,13 @@ let g:javascript_enable_domhtmlcss = 1
 " vim-flake8
 " ==========
 " autocmd BufWritePost *.py call Flake8()
+"
+" rust-analyzer
+" =============
+if executable('rust-analyzer')
+    au User lsp_setup call lsp#register_server({
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \ })
+endif
