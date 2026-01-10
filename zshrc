@@ -41,6 +41,19 @@ source $HOME/.aliases
 #     source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 # fi
 
-if command -v nu >/dev/null 2>&1; then
-  nu
+# Launch nushell automatically for interactive shells
+# Conditions: nu exists, shell is interactive, not invoked from within nushell
+if [[ $- == *i* ]] && command -v nu > /dev/null 2>&1; then
+    export SHELL=nu
+    exec nu
 fi
+
+export PATH="/Users/kioku/.bun/bin:$PATH"
+
+# bun completions
+[ -s "/Users/kioku/.bun/_bun" ] && source "/Users/kioku/.bun/_bun"
+
+. "$HOME/.local/bin/env"
+
+# Source secrets if available
+[ -f "$HOME/.secrets" ] && . "$HOME/.secrets"

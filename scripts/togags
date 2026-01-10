@@ -1,0 +1,37 @@
+#!/usr/bin/osascript
+
+if running of application "System Preferences" then
+    try
+        quit application "System Preferences"
+    on error
+        do shell script "killall 'System Preferences'"
+    end try
+end if
+
+repeat while running of application "System Preferences" is true
+    delay 0.1
+end repeat
+
+tell application "System Preferences"
+    reveal pane id "com.apple.preference.energysaver"
+    repeat until exists window "Energy Saver"
+        delay 0.1
+    end repeat
+end tell
+
+tell application "System Events" to tell ¬ 
+    group 1 of window "Energy Saver" of application process "System Preferences"
+    repeat until exists checkbox "Automatic graphics switching"
+        delay 0.1
+    end repeat
+    click checkbox "Automatic graphics switching"
+    set cbAGS to (value of checkbox "Automatic graphics switching") as boolean
+end tell
+
+quit application "System Preferences"
+
+if cbAGS then
+    return "   Automatic Graphics Switching is: ON"
+else
+    return "   Automatic Graphics Switching is: OFF"
+end if
