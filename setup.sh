@@ -111,8 +111,9 @@ setup_symlinks() {
     create_symlink "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
     create_symlink "$DOTFILES_DIR/gitmessage" "$HOME/.gitmessage"
 
-    # Bash (fallback shell)
+    # Shell configs (both launch nushell for interactive sessions)
     create_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
+    create_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 
     # Tmux
     create_symlink "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"

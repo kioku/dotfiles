@@ -33,7 +33,8 @@ dotfiles/
 ├── tmux.conf              # Tmux configuration
 ├── gitconfig              # Git configuration
 ├── gitmessage             # Commit message template
-└── bashrc                 # Bash fallback config
+├── bashrc                 # Bash config (launches nushell)
+└── zshrc                  # Zsh config (launches nushell)
 ```
 
 ## Installation

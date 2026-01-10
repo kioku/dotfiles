@@ -1,0 +1,22 @@
+# .zshrc
+
+# Launch nushell automatically for interactive shells
+if [[ $- == *i* ]] && command -v nu > /dev/null 2>&1; then
+    export SHELL=nu
+    exec nu
+fi
+
+# If we reach here, nushell is not available - set up zsh environment
+
+# Cargo
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# Local bin
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+# Bun
+export PATH="$HOME/.bun/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && . "$HOME/.bun/_bun"
+
+# Source secrets if available
+[ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
