@@ -45,6 +45,7 @@ check_prerequisites() {
     # Optional but recommended
     echo
     info "Optional tools:"
+    check_command "tmux" "brew install tmux" || true
     check_command "fnm" "brew install fnm" || true
     check_command "bun" "brew install bun" || true
     check_command "rustc" "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" || true
@@ -112,6 +113,9 @@ setup_symlinks() {
 
     # Bash (fallback shell)
     create_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
+
+    # Tmux
+    create_symlink "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
 
     echo
     info "Symlinks complete."

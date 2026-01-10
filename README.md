@@ -7,6 +7,7 @@ Personal dotfiles for macOS.
 - **Shell**: Nushell
 - **Prompt**: Starship (pure preset)
 - **Editor**: Neovim with LazyVim
+- **Multiplexer**: tmux
 - **Navigation**: zoxide
 - **Node management**: fnm
 
@@ -22,7 +23,9 @@ dotfiles/
 │   │   └── ignore     # Global gitignore
 │   └── starship.toml  # Prompt configuration
 ├── scripts/           # Utility scripts
+├── Brewfile           # Homebrew packages
 ├── setup.sh           # Setup script
+├── tmux.conf          # Tmux configuration
 ├── gitconfig          # Git configuration
 ├── gitmessage         # Commit message template
 └── bashrc             # Bash fallback config
@@ -35,8 +38,14 @@ dotfiles/
 Install via Homebrew:
 
 ```sh
-brew install nushell starship zoxide neovim
+brew install nushell starship zoxide neovim tmux
 brew install fnm bun  # optional
+```
+
+Or install everything from the Brewfile:
+
+```sh
+brew bundle install --file=~/dotfiles/Brewfile
 ```
 
 ### Setup
@@ -64,9 +73,21 @@ API keys and credentials are stored in `~/.secrets.nu` which is sourced by nushe
 $env.SOME_API_KEY = "your-key-here"
 ```
 
+## Brewfile
+
+The `Brewfile` captures the complete set of Homebrew packages, casks, and cargo tools installed on this system. Use it to replicate the full development environment:
+
+```sh
+# Install everything
+brew bundle install --file=~/dotfiles/Brewfile
+
+# Check what would be installed
+brew bundle check --file=~/dotfiles/Brewfile
+```
+
 ## Legacy Configs
 
-Legacy vim, tmux, zsh, and prezto configs are preserved in the `archive/legacy-configs` branch.
+Legacy vim, zsh, and prezto configs are preserved in the `archive/legacy-configs` branch.
 
 ## Neovim
 
