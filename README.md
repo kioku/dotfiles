@@ -22,12 +22,8 @@ dotfiles/
 │   │   └── ignore     # Global gitignore
 │   └── starship.toml  # Prompt configuration
 ├── gitconfig          # Git configuration
-├── gitignore_global   # Legacy global gitignore
 ├── gitmessage         # Commit message template
 ├── bashrc             # Bash fallback config
-├── zshrc              # Zsh config (launches nushell)
-├── zshenv             # Zsh environment
-├── zprofile           # Zsh profile
 └── scripts/           # Utility scripts
 ```
 
@@ -76,7 +72,7 @@ $env.SOME_API_KEY = "your-key-here"
 
 ## Legacy Configs
 
-Legacy vim, tmux, and prezto configs are preserved in the `archive/legacy-configs` branch.
+Legacy vim, tmux, zsh, and prezto configs are preserved in the `archive/legacy-configs` branch.
 
 ## Neovim
 
