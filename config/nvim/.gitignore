@@ -1,0 +1,13 @@
+# LazyVim state files (machine-specific)
+lazy-lock.json
+lazyvim.json
+
+# Debug/test artifacts
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data

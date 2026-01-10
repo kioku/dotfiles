@@ -16,19 +16,24 @@ Personal dotfiles for macOS.
 ```
 dotfiles/
 ├── config/
-│   ├── nushell/       # Nushell shell configuration
+│   ├── nvim/              # Neovim configuration (LazyVim-based)
+│   │   ├── init.lua
+│   │   └── lua/
+│   │       ├── config/    # LazyVim config overrides
+│   │       └── plugins/   # Custom plugin specs
+│   ├── nushell/           # Nushell shell configuration
 │   │   ├── config.nu
 │   │   └── env.nu
 │   ├── git/
-│   │   └── ignore     # Global gitignore
-│   └── starship.toml  # Prompt configuration
-├── scripts/           # Utility scripts
-├── Brewfile           # Homebrew packages
-├── setup.sh           # Setup script
-├── tmux.conf          # Tmux configuration
-├── gitconfig          # Git configuration
-├── gitmessage         # Commit message template
-└── bashrc             # Bash fallback config
+│   │   └── ignore         # Global gitignore
+│   └── starship.toml      # Prompt configuration
+├── scripts/               # Utility scripts
+├── Brewfile               # Homebrew packages
+├── setup.sh               # Setup script
+├── tmux.conf              # Tmux configuration
+├── gitconfig              # Git configuration
+├── gitmessage             # Commit message template
+└── bashrc                 # Bash fallback config
 ```
 
 ## Installation
@@ -65,6 +70,18 @@ The script will:
 - Create symlinks (backing up existing files)
 - Set up the secrets file
 
+## Neovim
+
+The Neovim configuration is based on [LazyVim](https://www.lazyvim.org/) with custom plugins:
+
+- **codecompanion.nvim**: AI assistant with Copilot backend
+- **LSP overrides**: Deno/TypeScript conflict resolution (denols vs tsserver)
+- **lazygit**: Nushell-compatible editor integration
+
+Plugin lock files (`lazy-lock.json`, `lazyvim.json`) are gitignored as they're machine-specific.
+
+On first launch, lazy.nvim will bootstrap and install all plugins automatically.
+
 ## Secrets
 
 API keys and credentials are stored in `~/.secrets.nu` which is sourced by nushell but not tracked in git. Example:
@@ -88,7 +105,3 @@ brew bundle check --file=~/dotfiles/Brewfile
 ## Legacy Configs
 
 Legacy vim, zsh, and prezto configs are preserved in the `archive/legacy-configs` branch.
-
-## Neovim
-
-Neovim configuration uses LazyVim and is managed separately at `~/.config/nvim/`.

@@ -117,6 +117,9 @@ setup_symlinks() {
     # Tmux
     create_symlink "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
 
+    # Neovim (symlink entire config directory)
+    create_symlink "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
+
     echo
     info "Symlinks complete."
 }
