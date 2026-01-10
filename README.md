@@ -1,27 +1,83 @@
 # dotfiles
 
-This repository contains the dotfiles that I use.
+Personal dotfiles for macOS.
 
-# Usage
+## Current Setup
 
-You will need to have the [rcm](https://github.com/thoughtbot/rcm) utility
-installed.
+- **Shell**: Nushell
+- **Prompt**: Starship (pure preset)
+- **Editor**: Neovim with LazyVim
+- **Navigation**: zoxide
+- **Node management**: fnm
 
-    cd ~
-    git clone https://github.com/kioku/dotfiles.git
-    env RCRC=$HOME/dotfiles/rcrc rcup
+## Structure
 
-Afterwards we need to install the vim plugins, so open up a vim instance
-and run :PlugInstall
+```
+dotfiles/
+├── config/
+│   ├── nushell/       # Nushell shell configuration
+│   │   ├── config.nu
+│   │   └── env.nu
+│   ├── git/
+│   │   └── ignore     # Global gitignore
+│   └── starship.toml  # Prompt configuration
+├── gitconfig          # Git configuration
+├── gitignore_global   # Legacy global gitignore
+├── gitmessage         # Commit message template
+├── bashrc             # Bash fallback config
+├── zshrc              # Zsh config (launches nushell)
+├── zshenv             # Zsh environment
+├── zprofile           # Zsh profile
+└── scripts/           # Utility scripts
+```
 
-Plug vim will not install the node modules required for tern, so the last step
-is to find your local `.../vim/plug/tern_for_vim` and `npm install` them.
+## Installation
 
-# Vim Plugins
+### Prerequisites
 
-- 'kchmck/vim-coffee-script'
-- 'davidhalter/jedi-vim'
-- 'marijnh/tern_for_vim'
-- 'scrooloose/nerdtree'
-- 'scrooloose/nerdcommenter'
-- 'tpope/vim-fugitive'
+- [Nushell](https://www.nushell.sh/)
+- [Starship](https://starship.rs/)
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
+- [fnm](https://github.com/Schniz/fnm)
+
+### Setup
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/kioku/dotfiles.git ~/dotfiles
+   ```
+
+2. Create symlinks for nushell config:
+   ```sh
+   ln -sf ~/dotfiles/config/nushell/config.nu ~/Library/Application\ Support/nushell/config.nu
+   ln -sf ~/dotfiles/config/nushell/env.nu ~/Library/Application\ Support/nushell/env.nu
+   ```
+
+3. Create symlinks for other configs:
+   ```sh
+   ln -sf ~/dotfiles/config/starship.toml ~/.config/starship.toml
+   ln -sf ~/dotfiles/config/git/ignore ~/.config/git/ignore
+   ln -sf ~/dotfiles/gitconfig ~/.gitconfig
+   ```
+
+4. Create secrets file (not tracked):
+   ```sh
+   touch ~/.secrets.nu
+   # Add your API keys and secrets to this file
+   ```
+
+## Secrets
+
+API keys and credentials are stored in `~/.secrets.nu` which is sourced by nushell but not tracked in git. Example:
+
+```nu
+$env.SOME_API_KEY = "your-key-here"
+```
+
+## Legacy Configs
+
+Legacy vim, tmux, and prezto configs are preserved in the `archive/legacy-configs` branch.
+
+## Neovim
+
+Neovim configuration uses LazyVim and is managed separately at `~/.config/nvim/`.
