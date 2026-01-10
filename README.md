@@ -21,20 +21,23 @@ dotfiles/
 │   ├── git/
 │   │   └── ignore     # Global gitignore
 │   └── starship.toml  # Prompt configuration
+├── scripts/           # Utility scripts
+├── setup.sh           # Setup script
 ├── gitconfig          # Git configuration
 ├── gitmessage         # Commit message template
-├── bashrc             # Bash fallback config
-└── scripts/           # Utility scripts
+└── bashrc             # Bash fallback config
 ```
 
 ## Installation
 
 ### Prerequisites
 
-- [Nushell](https://www.nushell.sh/)
-- [Starship](https://starship.rs/)
-- [zoxide](https://github.com/ajeetdsouza/zoxide)
-- [fnm](https://github.com/Schniz/fnm)
+Install via Homebrew:
+
+```sh
+brew install nushell starship zoxide neovim
+brew install fnm bun  # optional
+```
 
 ### Setup
 
@@ -43,24 +46,15 @@ dotfiles/
    git clone https://github.com/kioku/dotfiles.git ~/dotfiles
    ```
 
-2. Create symlinks for nushell config:
+2. Run the setup script:
    ```sh
-   ln -sf ~/dotfiles/config/nushell/config.nu ~/Library/Application\ Support/nushell/config.nu
-   ln -sf ~/dotfiles/config/nushell/env.nu ~/Library/Application\ Support/nushell/env.nu
+   ~/dotfiles/setup.sh
    ```
 
-3. Create symlinks for other configs:
-   ```sh
-   ln -sf ~/dotfiles/config/starship.toml ~/.config/starship.toml
-   ln -sf ~/dotfiles/config/git/ignore ~/.config/git/ignore
-   ln -sf ~/dotfiles/gitconfig ~/.gitconfig
-   ```
-
-4. Create secrets file (not tracked):
-   ```sh
-   touch ~/.secrets.nu
-   # Add your API keys and secrets to this file
-   ```
+The script will:
+- Check for required prerequisites
+- Create symlinks (backing up existing files)
+- Set up the secrets file
 
 ## Secrets
 
