@@ -7,7 +7,7 @@
 $env.config.show_banner = false
 
 # PATH additions
-$env.PATH = ($env.PATH | prepend '~/.bun/bin')
+$env.PATH = ($env.PATH | prepend '~/.cargo/bin' | prepend '~/.bun/bin')
 
 # init zoxide
 source ~/.zoxide.nu
