@@ -11,12 +11,17 @@ fi
 # Cargo
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-# Local bin
+# Local bin (Claude Code)
+export PATH="$HOME/.local/bin:$PATH"
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # Bun
 export PATH="$HOME/.bun/bin:$PATH"
 [ -s "$HOME/.bun/_bun" ] && . "$HOME/.bun/_bun"
+
+# .NET
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
 # Source secrets if available
 [ -f "$HOME/.secrets" ] && . "$HOME/.secrets"

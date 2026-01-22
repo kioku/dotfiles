@@ -7,7 +7,18 @@
 $env.config.show_banner = false
 
 # PATH additions
-$env.PATH = ($env.PATH | prepend '~/.cargo/bin' | prepend '~/.bun/bin')
+$env.PATH = ($env.PATH
+    | prepend '~/.cargo/bin'
+    | prepend '~/.bun/bin'
+    | prepend '~/.local/bin'  # Claude Code
+)
+
+# .NET
+$env.DOTNET_ROOT = ($env.HOME | path join '.dotnet')
+$env.PATH = ($env.PATH
+    | prepend ($env.DOTNET_ROOT | path join 'tools')
+    | prepend $env.DOTNET_ROOT
+)
 
 # init zoxide
 source ~/.zoxide.nu
