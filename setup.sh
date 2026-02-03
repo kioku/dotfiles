@@ -107,9 +107,15 @@ setup_symlinks() {
     create_symlink "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
 
     # Git
-    create_symlink "$DOTFILES_DIR/config/git/ignore" "$HOME/.config/git/ignore"
     create_symlink "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
     create_symlink "$DOTFILES_DIR/gitmessage" "$HOME/.gitmessage"
+    create_symlink "$DOTFILES_DIR/gitignore_global" "$HOME/.gitignore_global"
+
+    # EditorConfig
+    create_symlink "$DOTFILES_DIR/editorconfig" "$HOME/.editorconfig"
+
+    # Karabiner
+    create_symlink "$DOTFILES_DIR/config/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
 
     # Shell configs (both launch nushell for interactive sessions)
     create_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"

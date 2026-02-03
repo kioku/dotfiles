@@ -1,0 +1,37 @@
+# EditorConfig - https://editorconfig.org
+
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Web files (JS, TS, CSS, HTML, JSON, YAML)
+[*.{js,jsx,ts,tsx,css,scss,html,json,yaml,yml,vue,svelte}]
+indent_size = 2
+
+# Markdown - preserve trailing whitespace for line breaks
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefiles require tabs
+[Makefile]
+indent_style = tab
+
+# Shell scripts
+[*.sh]
+indent_size = 2
+
+# Lua (Neovim config)
+[*.lua]
+indent_size = 2
+
+# Git config files
+[.git*]
+indent_size = 4
+indent_style = tab

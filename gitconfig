@@ -23,7 +23,7 @@
     template=~/.gitmessage
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.config/git/ignore
     pager = delta
 [merge]
     ff = only
