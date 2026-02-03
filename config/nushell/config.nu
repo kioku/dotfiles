@@ -26,8 +26,14 @@ source ~/.zoxide.nu
 # init atuin (shell history)
 source ~/.atuin.nu
 
-# init direnv (per-directory env)
-source ~/.direnv.nu
+# init direnv (per-directory env) via PWD hook
+$env.config.hooks.env_change.PWD = (
+    $env.config.hooks.env_change.PWD? | default [] | append {||
+        if (which direnv | is-not-empty) {
+            direnv export json | from json | default {} | load-env
+        }
+    }
+)
 
 # Aliases
 alias ls = eza

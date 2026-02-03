@@ -18,12 +18,8 @@ if (which atuin | is-not-empty) {
     "" | save -f ~/.atuin.nu
 }
 
-# Initialize direnv (per-directory env)
-if (which direnv | is-not-empty) {
-    direnv hook nu | save -f ~/.direnv.nu
-} else {
-    "" | save -f ~/.direnv.nu
-}
+# Initialize direnv (per-directory env) - manual hook since direnv doesn't support nu natively
+"" | save -f ~/.direnv.nu
 
 # Initialize starship prompt
 mkdir ($nu.data-dir | path join "vendor/autoload")
