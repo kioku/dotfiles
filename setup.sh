@@ -117,6 +117,9 @@ setup_symlinks() {
     # Karabiner
     create_symlink "$DOTFILES_DIR/config/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
 
+    # Direnv
+    create_symlink "$DOTFILES_DIR/config/direnv/direnv.toml" "$HOME/.config/direnv/direnv.toml"
+
     # Shell configs (both launch nushell for interactive sessions)
     create_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
     create_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
