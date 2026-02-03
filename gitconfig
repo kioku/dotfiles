@@ -22,7 +22,7 @@
 [commit]
     template=~/.gitmessage
 [core]
-    editor = vim
+    editor = nvim
     excludesfile = ~/.gitignore_global
     pager = delta
 [merge]
