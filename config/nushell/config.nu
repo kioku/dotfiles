@@ -23,6 +23,18 @@ $env.PATH = ($env.PATH
 # init zoxide
 source ~/.zoxide.nu
 
+# init atuin (shell history)
+source ~/.atuin.nu
+
+# init direnv (per-directory env)
+source ~/.direnv.nu
+
+# Aliases
+alias ls = eza
+alias ll = eza -l
+alias la = eza -la
+alias lt = eza --tree
+
 # Completions
 use ~/.config/nushell/git-completions.nu *
 use ~/.config/nushell/jj-completions.nu *

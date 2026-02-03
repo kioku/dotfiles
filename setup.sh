@@ -167,6 +167,45 @@ setup_nushell_completions() {
     fi
 }
 
+setup_ai_tools() {
+    info "Setting up AI coding tools..."
+    echo
+
+    # Claude Code
+    if command -v claude > /dev/null 2>&1; then
+        info "Claude Code already installed: $(command -v claude)"
+    else
+        info "Installing Claude Code..."
+        curl -fsSL https://claude.ai/install.sh | bash
+    fi
+
+    # Check for Node.js (required for npm packages)
+    if ! command -v node > /dev/null 2>&1; then
+        warn "Node.js not found. Install via fnm first:"
+        warn "  fnm install --lts && fnm use --lts"
+        return 1
+    fi
+
+    # Codex CLI
+    if command -v codex > /dev/null 2>&1; then
+        info "Codex already installed: $(command -v codex)"
+    else
+        info "Installing Codex..."
+        npm install -g @openai/codex
+    fi
+
+    # pi coding agent
+    if command -v pi > /dev/null 2>&1; then
+        info "pi already installed: $(command -v pi)"
+    else
+        info "Installing pi coding agent..."
+        npm install -g @mariozechner/pi-coding-agent
+    fi
+
+    echo
+    info "AI tools setup complete."
+}
+
 # ------------------------------------------------------------------------------
 # Main
 # ------------------------------------------------------------------------------
@@ -188,6 +227,9 @@ main() {
     echo
 
     setup_nushell_completions
+    echo
+
+    setup_ai_tools
     echo
 
     echo "=========================================="
