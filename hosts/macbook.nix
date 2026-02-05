@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, ... }: {
   imports = [ ../home ];
 
   # Karabiner: macOS-only. Under Home Manager this becomes a read-only
