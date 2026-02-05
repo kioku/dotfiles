@@ -27,12 +27,6 @@ in
   xdg.configFile."nushell/env.nu" = lib.mkIf (!isDarwin) {
     source = ../config/nushell/env.nu;
   };
-  xdg.configFile."nushell/git-completions.nu" = lib.mkIf (!isDarwin) {
-    source = ../config/nushell/git-completions.nu;
-  };
-  xdg.configFile."nushell/jj-completions.nu" = lib.mkIf (!isDarwin) {
-    source = ../config/nushell/jj-completions.nu;
-  };
 
   # macOS: ~/Library/Application Support/nushell/
   home.file."Library/Application Support/nushell/config.nu" = lib.mkIf isDarwin {
@@ -40,12 +34,6 @@ in
   };
   home.file."Library/Application Support/nushell/env.nu" = lib.mkIf isDarwin {
     source = ../config/nushell/env.nu;
-  };
-  home.file."Library/Application Support/nushell/git-completions.nu" = lib.mkIf isDarwin {
-    source = ../config/nushell/git-completions.nu;
-  };
-  home.file."Library/Application Support/nushell/jj-completions.nu" = lib.mkIf isDarwin {
-    source = ../config/nushell/jj-completions.nu;
   };
 
   home.file.".bashrc".source = ../bashrc;
@@ -60,10 +48,28 @@ in
     fi
   '';
 
-  # Regenerate shell completions from installed tools. The repo ships stubs
-  # so nushell always starts, but real completions are richer.
+  # Completion files live outside Home Manager's file management so that
+  # activation scripts can overwrite them without fighting HM symlinks.
+  # On first activation, stubs are created so nushell can always start.
+  # When the backing tool is available, real completions replace the stub.
   home.activation.generateCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     NUSHELL_DIR="$HOME/${nushellConfigDir}"
+
+    # Ensure stubs exist so nushell starts even without the tools
+    if [ ! -f "$NUSHELL_DIR/git-completions.nu" ]; then
+      echo "# Stub: regenerated at activation time if the tool is available." \
+        > "$NUSHELL_DIR/git-completions.nu"
+    fi
+    if [ ! -f "$NUSHELL_DIR/jj-completions.nu" ]; then
+      echo "# Stub: regenerated at activation time if the tool is available." \
+        > "$NUSHELL_DIR/jj-completions.nu"
+    fi
+
+    # Generate real completions when tools are present
+    if command -v git >/dev/null 2>&1; then
+      # nushell ships a built-in git completions module via std; use it
+      echo "use std/completions/git *" > "$NUSHELL_DIR/git-completions.nu"
+    fi
     if command -v jj >/dev/null 2>&1; then
       jj util completion nushell > "$NUSHELL_DIR/jj-completions.nu"
     fi

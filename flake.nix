@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # TODO: consume when macOS profile becomes active
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,21 +31,25 @@
           modules = [ ./hosts/nix.nix ];
         };
         "kioku@macbook" = mkHome {
-          system = "x86_64-darwin";
+          system = "aarch64-darwin";
           username = "kioku";
           modules = [ ./hosts/macbook.nix ];
         };
       };
 
-      packages.x86_64-linux.configs =
-        nixpkgs.legacyPackages.x86_64-linux.runCommand "dotfiles-configs" { } ''
-          mkdir -p $out/.config/git
+      packages = let
+        mkConfigs = system:
+          nixpkgs.legacyPackages.${system}.runCommand "dotfiles-configs" { } ''
+            mkdir -p $out/.config/git
 
-          cp ${./gitconfig} $out/.gitconfig
-          cp ${./gitmessage} $out/.gitmessage
-          cp ${./tmux.conf} $out/.tmux.conf
-          cp ${./editorconfig} $out/.editorconfig
-          cp -r ${./config/git}/* $out/.config/git/
-        '';
+            cp ${./gitconfig} $out/.gitconfig
+            cp ${./gitmessage} $out/.gitmessage
+            cp ${./tmux.conf} $out/.tmux.conf
+            cp ${./editorconfig} $out/.editorconfig
+            cp -r ${./config/git}/* $out/.config/git/
+          '';
+      in nixpkgs.lib.genAttrs
+        [ "x86_64-linux" "aarch64-linux" ]
+        (system: { configs = mkConfigs system; });
     };
 }

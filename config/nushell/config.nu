@@ -41,9 +41,11 @@ alias ll = eza -l
 alias la = eza -la
 alias lt = eza --tree
 
-# Completions
-use ~/.config/nushell/git-completions.nu *
-use ~/.config/nushell/jj-completions.nu *
+# Completions (relative paths resolve against the config directory,
+# so they work on both Linux (~/.config/nushell/) and macOS
+# (~/Library/Application Support/nushell/) without platform branching).
+use git-completions.nu *
+use jj-completions.nu *
 
 # fnm (Node version manager)
 if not (which fnm | is-empty) {
