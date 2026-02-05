@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal dotfiles for macOS.
+Personal dotfiles for macOS and NixOS.
 
 ## Current Setup
 
@@ -15,6 +15,16 @@ Personal dotfiles for macOS.
 
 ```
 dotfiles/
+├── home/                  # Home Manager modules
+│   ├── default.nix        # Common profile (username, homeDirectory, imports)
+│   ├── shell.nix          # Nushell, starship, zoxide, atuin, CLI tools
+│   ├── editor.nix         # Neovim
+│   ├── git.nix            # Git, gh, delta, lazygit
+│   ├── tmux.nix           # tmux
+│   └── dev.nix            # Dev tooling (deno, just, btop, etc.)
+├── hosts/                 # Per-machine profiles
+│   ├── nix.nix            # NixOS server (ops@ax-foundry)
+│   └── macbook.nix        # macOS (dormant — not active on current machine)
 ├── config/
 │   ├── nvim/              # Neovim configuration (LazyVim-based)
 │   │   ├── init.lua
@@ -24,20 +34,60 @@ dotfiles/
 │   ├── nushell/           # Nushell shell configuration
 │   │   ├── config.nu
 │   │   └── env.nu
+│   ├── direnv/
+│   │   └── direnv.toml    # Direnv configuration
 │   ├── git/
 │   │   └── ignore         # Global gitignore
+│   ├── karabiner/         # Karabiner-Elements (macOS)
+│   │   └── karabiner.json
 │   └── starship.toml      # Prompt configuration
 ├── scripts/               # Utility scripts
-├── Brewfile               # Homebrew packages
-├── setup.sh               # Setup script
+├── Brewfile               # Homebrew packages (macOS)
+├── setup.sh               # Setup script (macOS, without Nix)
+├── flake.nix              # Nix flake (Home Manager + config export)
+├── flake.lock             # Pinned flake inputs
 ├── tmux.conf              # Tmux configuration
 ├── gitconfig              # Git configuration
 ├── gitmessage             # Commit message template
+├── editorconfig           # EditorConfig
 ├── bashrc                 # Bash config (launches nushell)
 └── zshrc                  # Zsh config (launches nushell)
 ```
 
-## Installation
+## Deployment
+
+`setup.sh` and Home Manager are mutually exclusive at the point of activation
+— a machine uses one or the other, never both simultaneously.
+
+### macOS (without Nix) — current approach
+
+```sh
+./setup.sh
+```
+
+### NixOS / Linux with Nix
+
+```sh
+home-manager switch --flake github:kioku/dotfiles#ops@nix
+```
+
+### macOS with Nix (available, not active)
+
+```sh
+home-manager switch --flake ~/dotfiles#kioku@macbook
+```
+
+### Minimal server (no Nix)
+
+Export only the essential config files (git, tmux, editorconfig) from a
+Nix-capable machine, then deploy with rsync:
+
+```sh
+nix build github:kioku/dotfiles#configs
+rsync -av result/ remote:~/
+```
+
+## Installation (macOS without Nix)
 
 ### Prerequisites
 
