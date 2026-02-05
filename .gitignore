@@ -4,6 +4,9 @@
 .env
 *.secret
 
+# Nix build output
+result
+
 # OS generated files
 .DS_Store
 .DS_Store?
