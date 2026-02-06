@@ -55,6 +55,9 @@ in
   home.activation.generateCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     NUSHELL_DIR="$HOME/${nushellConfigDir}"
 
+    # Ensure directory exists
+    mkdir -p "$NUSHELL_DIR"
+
     # Ensure stubs exist so nushell starts even without the tools
     if [ ! -f "$NUSHELL_DIR/git-completions.nu" ]; then
       echo "# Stub: regenerated at activation time if the tool is available." \
