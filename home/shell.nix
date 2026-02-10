@@ -36,6 +36,8 @@ in
     source = ../config/nushell/env.nu;
   };
 
+  xdg.configFile."atuin/config.toml".source = ../config/atuin/config.toml;
+
   home.file.".bashrc".source = ../bashrc;
   home.file.".zshrc".source = ../zshrc;
 
