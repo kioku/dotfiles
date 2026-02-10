@@ -32,6 +32,7 @@ brew "neovim"
 
 # Git tools
 brew "gh"                     # GitHub CLI
+brew "forgejo-cli"            # Forgejo CLI
 brew "git-delta"              # diff pager
 brew "git-filter-repo"        # history rewriting
 brew "git-quick-stats"        # git stats
