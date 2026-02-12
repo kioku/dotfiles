@@ -27,6 +27,9 @@ in
   xdg.configFile."nushell/env.nu" = lib.mkIf (!isDarwin) {
     source = ../config/nushell/env.nu;
   };
+  xdg.configFile."nushell/wt.nu" = lib.mkIf (!isDarwin) {
+    source = ../config/nushell/wt.nu;
+  };
 
   # macOS: ~/Library/Application Support/nushell/
   home.file."Library/Application Support/nushell/config.nu" = lib.mkIf isDarwin {
@@ -34,6 +37,9 @@ in
   };
   home.file."Library/Application Support/nushell/env.nu" = lib.mkIf isDarwin {
     source = ../config/nushell/env.nu;
+  };
+  home.file."Library/Application Support/nushell/wt.nu" = lib.mkIf isDarwin {
+    source = ../config/nushell/wt.nu;
   };
 
   xdg.configFile."atuin/config.toml".source = ../config/atuin/config.toml;
