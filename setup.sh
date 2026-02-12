@@ -102,6 +102,7 @@ setup_symlinks() {
     local nushell_config_dir="$HOME/Library/Application Support/nushell"
     create_symlink "$DOTFILES_DIR/config/nushell/config.nu" "$nushell_config_dir/config.nu"
     create_symlink "$DOTFILES_DIR/config/nushell/env.nu" "$nushell_config_dir/env.nu"
+    create_symlink "$DOTFILES_DIR/config/nushell/wt.nu" "$nushell_config_dir/wt.nu"
 
     # Starship
     create_symlink "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"

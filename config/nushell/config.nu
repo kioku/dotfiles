@@ -46,6 +46,7 @@ alias lt = eza --tree
 # (~/Library/Application Support/nushell/) without platform branching).
 use git-completions.nu *
 use jj-completions.nu *
+use wt.nu
 
 # fnm (Node version manager)
 if not (which fnm | is-empty) {
