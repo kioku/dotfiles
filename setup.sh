@@ -103,6 +103,8 @@ setup_symlinks() {
     create_symlink "$DOTFILES_DIR/config/nushell/config.nu" "$nushell_config_dir/config.nu"
     create_symlink "$DOTFILES_DIR/config/nushell/env.nu" "$nushell_config_dir/env.nu"
     create_symlink "$DOTFILES_DIR/config/nushell/wt.nu" "$nushell_config_dir/wt.nu"
+    create_symlink "$DOTFILES_DIR/config/nushell/git-completions.nu" "$nushell_config_dir/git-completions.nu"
+    create_symlink "$DOTFILES_DIR/config/nushell/jj-completions.nu" "$nushell_config_dir/jj-completions.nu"
 
     # Starship
     create_symlink "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
@@ -156,13 +158,18 @@ EOF
 }
 
 setup_nushell_completions() {
-    local completions_dir="$HOME/.config/nushell"
+    local completions_dir
+    if [[ "$(uname)" == "Darwin" ]]; then
+        completions_dir="$HOME/Library/Application Support/nushell"
+    else
+        completions_dir="$HOME/.config/nushell"
+    fi
+
     mkdir -p "$completions_dir"
 
     # Check if completions exist
     if [[ ! -f "$completions_dir/git-completions.nu" ]]; then
         warn "git-completions.nu not found in $completions_dir"
-        warn "Download from: https://github.com/nushell/nu_scripts/tree/main/custom-completions/git"
     fi
 
     if [[ ! -f "$completions_dir/jj-completions.nu" ]]; then
