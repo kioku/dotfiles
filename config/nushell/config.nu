@@ -41,12 +41,13 @@ alias ll = eza -l
 alias la = eza -la
 alias lt = eza --tree
 
-# Completions (relative paths resolve against the config directory,
-# so they work on both Linux (~/.config/nushell/) and macOS
-# (~/Library/Application Support/nushell/) without platform branching).
-use git-completions.nu *
-use jj-completions.nu *
-use wt.nu
+# Completions / modules.
+#
+# Use absolute paths rooted at $nu.default-config-dir so imports continue
+# to work when config.nu itself is symlinked into /nix/store by Home Manager.
+use ($nu.default-config-dir | path join 'git-completions.nu') *
+use ($nu.default-config-dir | path join 'jj-completions.nu') *
+use ($nu.default-config-dir | path join 'wt.nu')
 
 # fnm (Node version manager)
 if not (which fnm | is-empty) {

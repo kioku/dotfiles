@@ -8,6 +8,7 @@ $env.config.buffer_editor = "nvim"
 $env.config.edit_mode = "vi"
 $env.config.show_banner = false
 
+
 # NixOS exports environment.variables into /etc/set-environment for POSIX shells.
 # Nushell does not source it automatically, so import simple export KEY="VALUE"
 # pairs without overriding variables that are already present.
