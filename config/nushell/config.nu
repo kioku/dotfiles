@@ -23,6 +23,13 @@ $env.PATH = ($env.PATH
 # init zoxide
 source ~/.zoxide.nu
 
+# zoxide sets __zoxide_hooked as an env var. On newer Nushell builds this can
+# break `exec nu` because the inherited string value is re-parsed as a boolean.
+# Keep the hook, but avoid exporting the marker to child processes.
+if "__zoxide_hooked" in ($env | columns) {
+    hide-env __zoxide_hooked
+}
+
 # init atuin (shell history)
 source ~/.atuin.nu
 
