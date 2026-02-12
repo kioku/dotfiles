@@ -2,11 +2,11 @@
 #
 # Manages worktrees under `.worktrees/` in the repository root.
 #
-# Usage (after `use wt.nu`):
-#   wt add <branch> [-b base]   Create a worktree and cd into it
+# Usage (after `use wt.nu *`):
+#   wt add <branch> [-b base]    Create a worktree and cd into it
 #   wt remove [branch] [--force] Remove a worktree and delete its local branch
-#   wt go <branch>              Jump to an existing worktree
-#   wt list                     List all worktrees as a table
+#   wt go <branch>               Jump to an existing worktree
+#   wt list                      List all worktrees as a table
 
 # ---------------------------------------------------------------------------
 # Helpers (module-private)
@@ -85,12 +85,14 @@ def available-branches [] {
 #   wt go <branch>               Jump to an existing worktree
 #   wt list                      List all worktrees as a table
 export def main []: nothing -> nothing {
-    help wt
+    help "wt list"
+    print ""
+    print "Commands: wt add | wt remove | wt go | wt list"
 }
 
 # Create a worktree for the given branch and cd into it.
 # If the branch does not exist locally it is created from --base (default: HEAD).
-export def --env add [
+export def --env "wt add" [
     branch: string@available-branches  # Branch name (created from --base if new)
     --base (-b): string                # Start point for new branches (default: HEAD)
 ]: nothing -> nothing {
@@ -118,7 +120,7 @@ export def --env add [
 
 # Remove a worktree and delete its local branch.
 # When branch is omitted, operates on the current worktree.
-export def --env remove [
+export def --env "wt remove" [
     branch?: string@wt-branches  # Branch to remove (default: current worktree)
     --force (-f)                  # Force-remove even if the worktree is dirty
 ]: nothing -> nothing {
@@ -165,7 +167,7 @@ export def --env remove [
 }
 
 # Jump to an existing worktree.
-export def --env go [
+export def --env "wt go" [
     branch: string@wt-branches  # Target worktree branch
 ]: nothing -> nothing {
     let hit = (parse-worktrees | where branch == $branch)
@@ -176,7 +178,7 @@ export def --env go [
 }
 
 # List all worktrees (runs `git worktree prune` first).
-export def list []: nothing -> table<path: string, branch: string, commit: string> {
+export def "wt list" []: nothing -> table<path: string, branch: string, commit: string> {
     git worktree prune
     parse-worktrees
 }
