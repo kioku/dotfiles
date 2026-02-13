@@ -56,6 +56,17 @@ use ($nu.default-config-dir | path join 'git-completions.nu') *
 use ($nu.default-config-dir | path join 'jj-completions.nu') *
 use ($nu.default-config-dir | path join 'wt.nu') *
 
+# Worktree command group entrypoint.
+#
+# Note: actual operations are implemented as explicit commands from wt.nu:
+#   wt add | wt remove | wt go | wt list
+# This entrypoint only exists so `wt --help` is available.
+def wt []: nothing -> nothing {
+    help "wt list"
+    print ""
+    print "Commands: wt add | wt remove | wt go | wt list"
+}
+
 # fnm (Node version manager)
 if not (which fnm | is-empty) {
     fnm env --json | from json | load-env
