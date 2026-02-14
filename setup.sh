@@ -49,7 +49,9 @@ check_prerequisites() {
     check_command "fnm" "brew install fnm" || true
     check_command "bun" "brew install bun" || true
     check_command "cargo" "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" || true
+    check_command "cargo-binstall" "cargo install cargo-binstall" || true
     check_command "wt-core" "cargo install wt-core" || true
+    check_command "aperture" "cargo binstall aperture-cli || cargo install aperture-cli" || true
 
     echo
     if [[ $missing -gt 0 ]]; then
@@ -179,6 +181,39 @@ setup_wt_core() {
     fi
 }
 
+setup_aperture() {
+    info "Ensuring aperture CLI is installed..."
+
+    if command -v aperture > /dev/null 2>&1; then
+        info "aperture already installed: $(command -v aperture)"
+        return 0
+    fi
+
+    # Fast path via cargo-binstall when available
+    if command -v cargo-binstall > /dev/null 2>&1; then
+        info "Installing aperture-cli with cargo-binstall..."
+        if cargo binstall --no-confirm aperture-cli; then
+            info "aperture-cli installed successfully (binstall)"
+            return 0
+        else
+            warn "cargo-binstall failed; falling back to cargo install"
+        fi
+    fi
+
+    if ! command -v cargo > /dev/null 2>&1; then
+        warn "cargo not found; skipping aperture-cli install"
+        warn "Install Rust/cargo, then run: cargo install aperture-cli"
+        return 0
+    fi
+
+    info "Installing aperture-cli from crates.io..."
+    if cargo install aperture-cli; then
+        info "aperture-cli installed successfully"
+    else
+        warn "aperture-cli install failed"
+    fi
+}
+
 setup_nushell_completions() {
     local completions_dir
     if [[ "$(uname)" == "Darwin" ]]; then
@@ -281,6 +316,9 @@ main() {
     echo
 
     setup_wt_core
+    echo
+
+    setup_aperture
     echo
 
     setup_nushell_completions

@@ -26,6 +26,29 @@ let
       platforms = platforms.unix;
     };
   };
+
+  apertureCli = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "aperture-cli";
+    version = "0.1.7";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "kioku";
+      repo = "aperture";
+      rev = "v${version}";
+      hash = "sha256-zNO5ByfufXqHy7T4KafmoLJxSGn9lfQmT2UTBro60w0=";
+    };
+
+    cargoHash = "sha256-SYx2VuWMwYINXAG8BYhrh6Bu0P8CFIAIuVq3jj83Isc=";
+    doCheck = false;
+
+    meta = with lib; {
+      description = "Dynamic CLI generator for OpenAPI specifications";
+      homepage = "https://github.com/kioku/aperture";
+      license = licenses.mit;
+      platforms = platforms.unix;
+      mainProgram = "aperture";
+    };
+  };
 in
 {
   home.packages = with pkgs; [
@@ -41,6 +64,7 @@ in
     jq
     tree
     wtCore
+    apertureCli
   ];
 
   # Linux: ~/.config/nushell/
