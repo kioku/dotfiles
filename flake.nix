@@ -13,9 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     aperture.url = "github:kioku/aperture";
+    wtCore.url = "github:kioku/wt-core";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, aperture, ... }:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, aperture, wtCore, ... }:
     let
       mkHome = { system, username, modules }:
         home-manager.lib.homeManagerConfiguration {
@@ -23,6 +24,7 @@
           modules = modules;
           extraSpecialArgs = {
             inherit username;
+            wtCorePkg = wtCore.packages.${system}.default;
             aperturePkg = aperture.packages.${system}.default;
           };
         };
