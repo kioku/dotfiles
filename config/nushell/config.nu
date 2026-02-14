@@ -54,18 +54,7 @@ alias lt = eza --tree
 # to work when config.nu itself is symlinked into /nix/store by Home Manager.
 use ($nu.default-config-dir | path join 'git-completions.nu') *
 use ($nu.default-config-dir | path join 'jj-completions.nu') *
-use ($nu.default-config-dir | path join 'wt.nu') *
-
-# Worktree command group entrypoint.
-#
-# Note: actual operations are implemented as explicit commands from wt.nu:
-#   wt add | wt remove | wt go | wt list
-# This entrypoint only exists so `wt --help` is available.
-def wt []: nothing -> nothing {
-    help "wt list"
-    print ""
-    print "Commands: wt add | wt remove | wt go | wt list"
-}
+source ($nu.default-config-dir | path join 'wt.nu')
 
 # fnm (Node version manager)
 if not (which fnm | is-empty) {

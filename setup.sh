@@ -126,6 +126,8 @@ setup_symlinks() {
     # Shell configs (both launch nushell for interactive sessions)
     create_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
     create_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
+    create_symlink "$DOTFILES_DIR/config/wt/wt.bash" "$HOME/.config/wt/wt.bash"
+    create_symlink "$DOTFILES_DIR/config/wt/wt.zsh" "$HOME/.config/wt/wt.zsh"
 
     # Tmux
     create_symlink "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"

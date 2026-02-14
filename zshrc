@@ -25,3 +25,8 @@ export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
 # Source secrets if available
 [ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
+
+# wt fallback binding (when running zsh directly)
+if command -v wt-core > /dev/null 2>&1 && [ -f "$HOME/.config/wt/wt.zsh" ]; then
+    . "$HOME/.config/wt/wt.zsh"
+fi

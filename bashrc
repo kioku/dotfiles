@@ -25,3 +25,8 @@ export PATH="$HOME/.bun/bin:$PATH"
 
 # Source secrets if available
 [ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
+
+# wt fallback binding (when running bash directly)
+if command -v wt-core > /dev/null 2>&1 && [ -f "$HOME/.config/wt/wt.bash" ]; then
+    . "$HOME/.config/wt/wt.bash"
+fi

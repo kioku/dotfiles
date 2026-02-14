@@ -49,6 +49,8 @@ in
   };
 
   xdg.configFile."atuin/config.toml".source = ../config/atuin/config.toml;
+  xdg.configFile."wt/wt.bash".source = ../config/wt/wt.bash;
+  xdg.configFile."wt/wt.zsh".source = ../config/wt/wt.zsh;
 
   home.file.".bashrc".source = ../bashrc;
   home.file.".zshrc".source = ../zshrc;
