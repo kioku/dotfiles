@@ -4,6 +4,28 @@ let
   nushellConfigDir =
     if isDarwin then "Library/Application Support/nushell"
     else ".config/nushell";
+
+  wtCore = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "wt-core";
+    version = "0.1.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "kioku";
+      repo = "wt-core";
+      rev = "v${version}";
+      hash = "sha256-f+LjAoD071qvBjLsBxyuwfQIK6tk93MjYpjniZ5El4o=";
+    };
+
+    cargoHash = "sha256-6NqH9lFqHUT+UubMRgkZvkqKza397Gb/yaEHTiEt4kI=";
+    doCheck = false;
+
+    meta = with lib; {
+      description = "Portable Git worktree lifecycle manager";
+      homepage = "https://github.com/kioku/wt-core";
+      license = licenses.mit;
+      platforms = platforms.unix;
+    };
+  };
 in
 {
   home.packages = with pkgs; [
@@ -18,6 +40,7 @@ in
     ripgrep
     jq
     tree
+    wtCore
   ];
 
   # Linux: ~/.config/nushell/

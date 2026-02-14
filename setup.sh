@@ -48,7 +48,8 @@ check_prerequisites() {
     check_command "tmux" "brew install tmux" || true
     check_command "fnm" "brew install fnm" || true
     check_command "bun" "brew install bun" || true
-    check_command "rustc" "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" || true
+    check_command "cargo" "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh" || true
+    check_command "wt-core" "cargo install wt-core" || true
 
     echo
     if [[ $missing -gt 0 ]]; then
@@ -156,6 +157,28 @@ EOF
     fi
 }
 
+setup_wt_core() {
+    info "Ensuring wt-core is installed..."
+
+    if command -v wt-core > /dev/null 2>&1; then
+        info "wt-core already installed: $(command -v wt-core)"
+        return 0
+    fi
+
+    if ! command -v cargo > /dev/null 2>&1; then
+        warn "cargo not found; skipping wt-core install"
+        warn "Install Rust/cargo, then run: cargo install wt-core"
+        return 0
+    fi
+
+    info "Installing wt-core from crates.io..."
+    if cargo install wt-core; then
+        info "wt-core installed successfully"
+    else
+        warn "wt-core install failed; continuing with stub binding"
+    fi
+}
+
 setup_nushell_completions() {
     local completions_dir
     if [[ "$(uname)" == "Darwin" ]]; then
@@ -255,6 +278,9 @@ main() {
     echo
 
     setup_secrets
+    echo
+
+    setup_wt_core
     echo
 
     setup_nushell_completions
