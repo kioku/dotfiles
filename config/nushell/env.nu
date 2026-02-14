@@ -29,6 +29,10 @@ if ($nix_set_environment | path exists) {
     }
 }
 
+# Make wt available in non-interactive bash subshells (e.g. coding agents).
+# Bash reads $BASH_ENV before executing non-interactive scripts/commands.
+$env.BASH_ENV = ($env.HOME | path join ".bash_env")
+
 # Initialize zoxide
 zoxide init nushell | save -f ~/.zoxide.nu
 
