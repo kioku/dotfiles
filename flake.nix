@@ -12,15 +12,19 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    aperture.url = "github:kioku/aperture";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, ... }:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, aperture, ... }:
     let
       mkHome = { system, username, modules }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = modules;
-          extraSpecialArgs = { inherit username; };
+          extraSpecialArgs = {
+            inherit username;
+            aperturePkg = aperture.packages.${system}.default;
+          };
         };
     in
     {

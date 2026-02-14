@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "aperture": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1771032415,
+        "narHash": "sha256-VcINjWG4Kx9lp/n9vIT/5+3tdYevgkwqjtdIWIYPXjs=",
+        "owner": "kioku",
+        "repo": "aperture",
+        "rev": "d45e0028db313d961f5c2eef3be5322471e95647",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kioku",
+        "repo": "aperture",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -42,6 +60,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1770843696,
+        "narHash": "sha256-LovWTGDwXhkfCOmbgLVA10bvsi/P8eDDpRudgk68HA8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2343bbb58f99267223bc2aac4fc9ea301a155a16",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1770169770,
         "narHash": "sha256-awR8qIwJxJJiOmcEGgP2KUqYmHG4v/z8XpL9z8FnT1A=",
         "owner": "NixOS",
@@ -58,9 +92,10 @@
     },
     "root": {
       "inputs": {
+        "aperture": "aperture",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
