@@ -86,23 +86,23 @@ in
     fi
 
     # --- wt-core Nushell binding ---
-    if command -v wt-core >/dev/null 2>&1; then
-      wt-core init nu > "$WT_NU"
-    else
+    ${if wtCorePkg != null then ''
+      ${wtCorePkg}/bin/wt-core init nu > "$WT_NU"
+    '' else ''
       cat > "$WT_NU" <<'EOF'
 # Stub: generated when wt-core is not available.
 def wt [...args: string] {
   print "wt-core is not installed; install wt-core to enable wt commands."
 }
 EOF
-    fi
+    ''}
 
     # --- wt-core Bash binding (for non-interactive shells via BASH_ENV) ---
     BASH_ENV_FILE="$HOME/.bash_env"
-    if command -v wt-core >/dev/null 2>&1; then
-      wt-core init bash > "$BASH_ENV_FILE"
-    else
+    ${if wtCorePkg != null then ''
+      ${wtCorePkg}/bin/wt-core init bash > "$BASH_ENV_FILE"
+    '' else ''
       echo "# Stub: wt-core not available." > "$BASH_ENV_FILE"
-    fi
+    ''}
   '';
 }
