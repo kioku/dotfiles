@@ -52,6 +52,8 @@ alias lt = eza --tree
 #
 # Use absolute paths rooted at $nu.default-config-dir so imports continue
 # to work when config.nu itself is symlinked into /nix/store by Home Manager.
+#
+# wt.nu is generated at activation/setup time by `wt-core init nu`.
 use ($nu.default-config-dir | path join 'git-completions.nu') *
 use ($nu.default-config-dir | path join 'jj-completions.nu') *
 source ($nu.default-config-dir | path join 'wt.nu')

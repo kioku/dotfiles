@@ -27,6 +27,6 @@ export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 [ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
 
 # wt fallback binding (when running zsh directly)
-if command -v wt-core > /dev/null 2>&1 && [ -f "$HOME/.config/wt/wt.zsh" ]; then
-    . "$HOME/.config/wt/wt.zsh"
+if command -v wt-core > /dev/null 2>&1; then
+    eval "$(wt-core init zsh)"
 fi

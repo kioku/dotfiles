@@ -27,9 +27,6 @@ in
   xdg.configFile."nushell/env.nu" = lib.mkIf (!isDarwin) {
     source = ../config/nushell/env.nu;
   };
-  xdg.configFile."nushell/wt.nu" = lib.mkIf (!isDarwin) {
-    source = ../config/nushell/wt.nu;
-  };
   xdg.configFile."nushell/git-completions.nu" = lib.mkIf (!isDarwin) {
     source = ../config/nushell/git-completions.nu;
   };
@@ -41,16 +38,11 @@ in
   home.file."Library/Application Support/nushell/env.nu" = lib.mkIf isDarwin {
     source = ../config/nushell/env.nu;
   };
-  home.file."Library/Application Support/nushell/wt.nu" = lib.mkIf isDarwin {
-    source = ../config/nushell/wt.nu;
-  };
   home.file."Library/Application Support/nushell/git-completions.nu" = lib.mkIf isDarwin {
     source = ../config/nushell/git-completions.nu;
   };
 
   xdg.configFile."atuin/config.toml".source = ../config/atuin/config.toml;
-  xdg.configFile."wt/wt.bash".source = ../config/wt/wt.bash;
-  xdg.configFile."wt/wt.zsh".source = ../config/wt/wt.zsh;
 
   home.file.".bashrc".source = ../bashrc;
   home.file.".zshrc".source = ../zshrc;
@@ -64,24 +56,42 @@ in
     fi
   '';
 
-  # JJ completion lives outside Home Manager's file management so activation
-  # can overwrite it with `jj util completion nushell` when jj is installed.
-  # A stub is created on first activation so nushell always starts.
-  home.activation.generateCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  # Runtime-generated Nushell integrations live outside Home Manager's
+  # declarative file set so activation can refresh them based on installed
+  # tools (jj, wt-core) without fighting HM-managed symlinks.
+  home.activation.generateRuntimeIntegrations = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     NUSHELL_DIR="$HOME/${nushellConfigDir}"
+    WT_NU="$NUSHELL_DIR/wt.nu"
 
     # Ensure directory exists
     mkdir -p "$NUSHELL_DIR"
 
-    # Ensure a stub exists so nushell starts even without jj.
+    # Migrate from older symlink-based setup: generated files must be regular
+    # files owned in $HOME, not symlinks into tracked dotfiles paths.
+    if [ -L "$WT_NU" ]; then
+      rm -f "$WT_NU"
+    fi
+
+    # --- JJ completion ---
     if [ ! -f "$NUSHELL_DIR/jj-completions.nu" ]; then
       echo "# Stub: regenerated at activation time if the tool is available." \
         > "$NUSHELL_DIR/jj-completions.nu"
     fi
 
-    # Generate real jj completions when the tool is present
     if command -v jj >/dev/null 2>&1; then
       jj util completion nushell > "$NUSHELL_DIR/jj-completions.nu"
+    fi
+
+    # --- wt-core Nushell binding ---
+    if command -v wt-core >/dev/null 2>&1; then
+      wt-core init nu > "$WT_NU"
+    else
+      cat > "$WT_NU" <<'EOF'
+# Stub: generated when wt-core is not available.
+def wt [...args: string] {
+  print "wt-core is not installed; install wt-core to enable wt commands."
+}
+EOF
     fi
   '';
 }

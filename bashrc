@@ -27,6 +27,6 @@ export PATH="$HOME/.bun/bin:$PATH"
 [ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
 
 # wt fallback binding (when running bash directly)
-if command -v wt-core > /dev/null 2>&1 && [ -f "$HOME/.config/wt/wt.bash" ]; then
-    . "$HOME/.config/wt/wt.bash"
+if command -v wt-core > /dev/null 2>&1; then
+    eval "$(wt-core init bash)"
 fi

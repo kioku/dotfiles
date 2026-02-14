@@ -102,7 +102,6 @@ setup_symlinks() {
     local nushell_config_dir="$HOME/Library/Application Support/nushell"
     create_symlink "$DOTFILES_DIR/config/nushell/config.nu" "$nushell_config_dir/config.nu"
     create_symlink "$DOTFILES_DIR/config/nushell/env.nu" "$nushell_config_dir/env.nu"
-    create_symlink "$DOTFILES_DIR/config/nushell/wt.nu" "$nushell_config_dir/wt.nu"
     create_symlink "$DOTFILES_DIR/config/nushell/git-completions.nu" "$nushell_config_dir/git-completions.nu"
     create_symlink "$DOTFILES_DIR/config/nushell/jj-completions.nu" "$nushell_config_dir/jj-completions.nu"
 
@@ -126,8 +125,6 @@ setup_symlinks() {
     # Shell configs (both launch nushell for interactive sessions)
     create_symlink "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
     create_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
-    create_symlink "$DOTFILES_DIR/config/wt/wt.bash" "$HOME/.config/wt/wt.bash"
-    create_symlink "$DOTFILES_DIR/config/wt/wt.zsh" "$HOME/.config/wt/wt.zsh"
 
     # Tmux
     create_symlink "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
@@ -177,6 +174,27 @@ setup_nushell_completions() {
     if [[ ! -f "$completions_dir/jj-completions.nu" ]]; then
         warn "jj-completions.nu not found in $completions_dir"
         warn "Generate with: jj util completion nushell > $completions_dir/jj-completions.nu"
+    fi
+
+    # Generate wt-core Nu binding (or a startup-safe stub if wt-core is absent)
+    local wt_nu="$completions_dir/wt.nu"
+
+    # Migrate from older symlink-based setup.
+    if [[ -L "$wt_nu" ]]; then
+        rm -f "$wt_nu"
+    fi
+
+    if command -v wt-core > /dev/null 2>&1; then
+        wt-core init nu > "$wt_nu"
+        info "Generated wt-core Nushell binding: $wt_nu"
+    else
+        cat > "$wt_nu" << 'EOF'
+# Stub: generated when wt-core is not available.
+def wt [...args: string] {
+  print "wt-core is not installed; install wt-core to enable wt commands."
+}
+EOF
+        warn "wt-core not found; wrote stub binding to $wt_nu"
     fi
 }
 
