@@ -5,6 +5,12 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+# Make wt (and other shell functions) available in non-interactive bash.
+# Bash only sources .bashrc for interactive shells; non-interactive ones
+# look at BASH_ENV instead.  Exporting it here means nushell (and every
+# process it spawns) passes it through to child bash invocations.
+export BASH_ENV="$HOME/.bash_env"
+
 # Launch nushell automatically for interactive shells
 if [[ $- == *i* ]] && command -v nu > /dev/null 2>&1; then
     export SHELL=nu

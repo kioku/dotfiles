@@ -96,5 +96,13 @@ def wt [...args: string] {
 }
 EOF
     fi
+
+    # --- wt-core Bash binding (for non-interactive shells via BASH_ENV) ---
+    BASH_ENV_FILE="$HOME/.bash_env"
+    if command -v wt-core >/dev/null 2>&1; then
+      wt-core init bash > "$BASH_ENV_FILE"
+    else
+      echo "# Stub: wt-core not available." > "$BASH_ENV_FILE"
+    fi
   '';
 }
