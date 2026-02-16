@@ -104,5 +104,19 @@ EOF
     '' else ''
       echo "# Stub: wt-core not available." > "$BASH_ENV_FILE"
     ''}
+
+    # --- Agent-safe editor defaults ---
+    # Non-interactive bash without a TTY is almost certainly an agent
+    # subprocess. Override EDITOR/VISUAL/GIT_EDITOR to a no-op so that
+    # git and other tools never block waiting for a human.
+    cat >> "$BASH_ENV_FILE" <<'EDITOR_GUARD'
+
+# Agent-safe editor: default to no-op when there is no terminal
+if [ ! -t 0 ]; then
+    export EDITOR="true"
+    export VISUAL="true"
+    export GIT_EDITOR="true"
+fi
+EDITOR_GUARD
   '';
 }
