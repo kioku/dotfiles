@@ -85,25 +85,38 @@ in
       jj util completion nushell > "$NUSHELL_DIR/jj-completions.nu"
     fi
 
-    # --- wt-core Nushell binding ---
+    # --- Resolve wt-core binary ---
+    # Prefer the Nix store path (available at build time), but fall back to
+    # any wt-core on PATH (e.g. installed via cargo) so the bindings are
+    # generated even when the Nix package isn't wired up.
+    WT_CORE=""
     ${if wtCorePkg != null then ''
-      ${wtCorePkg}/bin/wt-core init nu > "$WT_NU"
+      WT_CORE="${wtCorePkg}/bin/wt-core"
     '' else ''
+      if command -v wt-core >/dev/null 2>&1; then
+        WT_CORE="$(command -v wt-core)"
+      fi
+    ''}
+
+    # --- wt-core Nushell binding ---
+    if [ -n "$WT_CORE" ]; then
+      "$WT_CORE" init nu > "$WT_NU"
+    else
       cat > "$WT_NU" <<'EOF'
 # Stub: generated when wt-core is not available.
 def wt [...args: string] {
   print "wt-core is not installed; install wt-core to enable wt commands."
 }
 EOF
-    ''}
+    fi
 
     # --- wt-core Bash binding (for non-interactive shells via BASH_ENV) ---
     BASH_ENV_FILE="$HOME/.bash_env"
-    ${if wtCorePkg != null then ''
-      ${wtCorePkg}/bin/wt-core init bash > "$BASH_ENV_FILE"
-    '' else ''
+    if [ -n "$WT_CORE" ]; then
+      "$WT_CORE" init bash > "$BASH_ENV_FILE"
+    else
       echo "# Stub: wt-core not available." > "$BASH_ENV_FILE"
-    ''}
+    fi
 
     # --- Agent-safe editor defaults ---
     # Non-interactive bash without a TTY is almost certainly an agent
