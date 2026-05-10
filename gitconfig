@@ -37,3 +37,10 @@
     email = contact@claudiu-ivan.com
 [delta]
     line-numbers = true
+[diff]
+    tool = delta
+[difftool]
+    prompt = false
+[difftool "delta"]
+    cmd = git diff --no-index -- "$LOCAL" "$REMOTE" | delta
+    trustExitCode = false
