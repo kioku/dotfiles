@@ -120,6 +120,10 @@ The script will:
 - Check for required prerequisites
 - Create symlinks (backing up existing files)
 - Set up the secrets file
+- Configure macOS screen lock and power management (requires administrator access):
+  - Disable the screen saver and require authentication when the display sleeps
+  - On AC power, turn off the display after 15 minutes and never sleep automatically
+  - On battery power, turn off the display after 5 minutes and sleep after 30 minutes
 
 ## Neovim
 

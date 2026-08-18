@@ -159,6 +159,29 @@ EOF
     fi
 }
 
+setup_macos_power_settings() {
+    if [[ "$(uname -s)" != "Darwin" ]]; then
+        info "Skipping macOS power settings on $(uname -s)."
+        return 0
+    fi
+
+    info "Configuring macOS screen lock and power settings..."
+
+    # Disable the screen saver and lock immediately when the display sleeps.
+    defaults -currentHost write com.apple.screensaver idleTime -int 0
+    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+    # AC: turn off the display after 15 minutes and never sleep automatically.
+    # Battery: turn off the display after 5 minutes and sleep after 30 minutes.
+    info "Administrator access is required to configure power management."
+    sudo pmset -c displaysleep 15 sleep 0
+    sudo pmset -b displaysleep 5 sleep 30
+
+    killall cfprefsd > /dev/null 2>&1 || true
+    info "macOS power settings configured."
+}
+
 setup_wt_core() {
     info "Ensuring wt-core is installed..."
 
@@ -313,6 +336,9 @@ main() {
     echo
 
     setup_secrets
+    echo
+
+    setup_macos_power_settings
     echo
 
     setup_wt_core
